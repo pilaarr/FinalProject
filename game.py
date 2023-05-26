@@ -118,13 +118,13 @@ QUESTION_BANK = {
     "Who is the author of 'The Lord of the Rings'?\na) J.R.R. Tolkien\nb) C.S. Lewis\nc) George R.R. Martin\nd) J.K. Rowling": 'a',
 }
 
-def shuffle_dictionary(dictionary):
+def shuffle_dictionary(dictionary):  # combining shuffle with .popitem (line 159) prevents from question repetition
     dictionary = list(dictionary.items())
     random.shuffle(dictionary)
     dictionary = dict(dictionary)
     return dictionary
 
-# def get_random_question():
+# def get_random_question():  # with this option there exists the possibility of question repetition
 #     questions = {
 #         '1+1?': '2',
 #         '2+2?': '4',
@@ -160,14 +160,14 @@ while True:
     print(question)
 
     # Check answer
-    answer = input('> ').lower().strip()
+    answer = input('> ').lower().strip()  # decapitalize and remove spaces so that the input can coincide with the solution in the dict
     if answer == solution:
         print("SLAYYYY 💅, you're not that stupid!")
         scores[current_player] += 1
         print(f'You win one point, now you have {scores[current_player]} point(s)')
-    else:
+    else:  # to move to next player's turn
         print(f'NOOOO 😭, the correct answer was "{solution}"')
-        current_player = (current_player + 1) % total_players
+        current_player = (current_player + 1) % total_players  # "%" allows to go back to the first player when the last player fails
 
     # Has game ended?
     if scores[current_player] == POINTS_TO_WIN:
@@ -178,7 +178,7 @@ sorted_scores = {}
 for index, score in enumerate(scores):
     player_name = 'Player ' + str(index+1)
     sorted_scores[player_name] = score
-sorted_scores = dict(sorted(sorted_scores.items(), key=lambda x: x[1], reverse=True))
+sorted_scores = dict(sorted(sorted_scores.items(), key=lambda x: x[1], reverse=True))  # sort from highest to lowest score
 
 # Show final scores
 print('')
