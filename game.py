@@ -119,6 +119,11 @@ QUESTION_BANK = {
 }
 
 def shuffle_dictionary(dictionary):  # combining shuffle with .popitem (line 159) prevents from question repetition
+    """
+    Function to shuffle a dictionary.
+    :param dictionary: the dictionary we want to shuffle
+    :return: shuffled dictionary
+    """
     dictionary = list(dictionary.items())
     random.shuffle(dictionary)
     dictionary = dict(dictionary)
